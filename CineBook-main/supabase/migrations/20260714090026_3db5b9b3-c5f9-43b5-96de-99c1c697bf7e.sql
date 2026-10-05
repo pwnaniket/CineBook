@@ -1,0 +1,2 @@
+ALTER TABLE public.movies ADD COLUMN IF NOT EXISTS trailer_key TEXT;
+ALTER TABLE public.movies ADD COLUMN IF NOT EXISTS tmdb_id INTEGER;

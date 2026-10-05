@@ -1,0 +1,363 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+@import "leaflet/dist/leaflet.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * CineBook — "cinema marquee at midnight" design system.
+ * Dark theme by default. All colors are oklch semantic tokens.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-gold: var(--gold);
+  --color-gold-foreground: var(--gold-foreground);
+  --color-vip: var(--vip);
+  --color-vip-foreground: var(--vip-foreground);
+  --color-screen: var(--screen);
+  --color-seat-standard: var(--seat-standard);
+  --color-seat-executive: var(--seat-executive);
+  --color-seat-premium: var(--seat-premium);
+  --color-seat-vip: var(--seat-vip);
+  --color-seat-selected: var(--seat-selected);
+  --color-seat-booked: var(--seat-booked);
+  --font-display: "Bebas Neue", "Impact", sans-serif;
+  --font-sans: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --shadow-glow-gold: 0 0 24px -4px color-mix(in oklab, var(--gold) 55%, transparent);
+  --shadow-glow-vip: 0 0 24px -4px color-mix(in oklab, var(--vip) 55%, transparent);
+  --shadow-premium: 0 20px 60px -20px color-mix(in oklab, black 90%, transparent), 0 0 0 1px color-mix(in oklab, var(--gold) 8%, transparent);
+}
+
+:root {
+  --radius: 0.75rem;
+  /* Cinema at midnight */
+  --background: oklch(0.13 0.015 280);           /* #0d0d12-ish */
+  --foreground: oklch(0.96 0.015 85);            /* off-white ticket paper */
+  --card: oklch(0.18 0.018 280);
+  --card-foreground: oklch(0.96 0.015 85);
+  --popover: oklch(0.16 0.018 280);
+  --popover-foreground: oklch(0.96 0.015 85);
+  /* Marquee gold */
+  --primary: oklch(0.78 0.155 78);               /* #e3a83b */
+  --primary-foreground: oklch(0.16 0.02 60);
+  --gold: oklch(0.78 0.155 78);
+  --gold-foreground: oklch(0.16 0.02 60);
+  /* Velvet red for VIP */
+  --vip: oklch(0.55 0.15 6);                     /* #b23a5c-ish */
+  --vip-foreground: oklch(0.98 0.01 60);
+  /* Cyan screen indicator */
+  --screen: oklch(0.78 0.10 210);                /* #4fb6c7 */
+  --secondary: oklch(0.22 0.02 280);
+  --secondary-foreground: oklch(0.96 0.015 85);
+  --muted: oklch(0.22 0.02 280);
+  --muted-foreground: oklch(0.72 0.02 85);
+  --accent: oklch(0.28 0.04 280);
+  --accent-foreground: oklch(0.96 0.015 85);
+  --destructive: oklch(0.65 0.22 25);
+  --destructive-foreground: oklch(0.98 0.01 60);
+  --border: oklch(1 0 0 / 8%);
+  --input: oklch(1 0 0 / 10%);
+  --ring: oklch(0.78 0.155 78 / 60%);
+  /* Seat classes */
+  --seat-standard: oklch(0.55 0.04 260);
+  --seat-executive: oklch(0.60 0.10 200);
+  --seat-premium: oklch(0.66 0.12 300);
+  --seat-vip: oklch(0.55 0.15 6);
+  --seat-selected: oklch(0.78 0.155 78);
+  --seat-booked: oklch(0.25 0.01 280);
+  --chart-1: var(--gold);
+  --chart-2: var(--screen);
+  --chart-3: var(--vip);
+  --chart-4: oklch(0.66 0.12 300);
+  --chart-5: oklch(0.75 0.15 140);
+  --sidebar: oklch(0.16 0.018 280);
+  --sidebar-foreground: oklch(0.96 0.015 85);
+  --sidebar-primary: var(--gold);
+  --sidebar-primary-foreground: var(--gold-foreground);
+  --sidebar-accent: oklch(0.22 0.02 280);
+  --sidebar-accent-foreground: oklch(0.96 0.015 85);
+  --sidebar-border: oklch(1 0 0 / 8%);
+  --sidebar-ring: var(--ring);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, color-mix(in oklab, var(--gold) 12%, transparent), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 100% 100%, color-mix(in oklab, var(--vip) 10%, transparent), transparent 60%);
+    background-attachment: fixed;
+  }
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+    letter-spacing: 0.02em;
+  }
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+}
+@utility font-mono-tabular {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+@utility text-gold {
+  color: var(--gold);
+}
+@utility bg-gold {
+  background-color: var(--gold);
+  color: var(--gold-foreground);
+}
+@utility bg-vip {
+  background-color: var(--vip);
+  color: var(--vip-foreground);
+}
+@utility text-screen {
+  color: var(--screen);
+}
+@utility ring-gold {
+  --tw-ring-color: color-mix(in oklab, var(--gold) 60%, transparent);
+}
+@utility card-premium {
+  background: linear-gradient(180deg, color-mix(in oklab, var(--card) 92%, black), var(--card));
+  border: 1px solid color-mix(in oklab, var(--gold) 12%, transparent);
+  box-shadow: var(--shadow-premium);
+  border-radius: var(--radius-xl);
+}
+@utility glow-gold {
+  box-shadow: var(--shadow-glow-gold);
+}
+@utility glow-vip {
+  box-shadow: var(--shadow-glow-vip);
+}
+/* Perforated ticket stub — dashed edge with notches on both ends */
+@utility ticket-stub {
+  position: relative;
+  background: linear-gradient(180deg, color-mix(in oklab, var(--card) 92%, black), var(--card));
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-premium);
+}
+@utility ticket-perforation {
+  background-image: linear-gradient(to right, color-mix(in oklab, var(--gold) 35%, transparent) 50%, transparent 50%);
+  background-size: 12px 2px;
+  background-repeat: repeat-x;
+  background-position: left center;
+  height: 2px;
+  position: relative;
+}
+@keyframes marquee-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+@utility marquee-pulse {
+  animation: marquee-pulse 2.4s ease-in-out infinite;
+}
+@utility marquee-text {
+  background: linear-gradient(90deg, var(--primary) 0%, color-mix(in oklab, var(--primary) 60%, white) 50%, var(--primary) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 40px color-mix(in oklab, var(--primary) 30%, transparent);
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ============================================================
+ * Premium global scrolling — CineBook
+ * Hides the browser scrollbar everywhere, keeps native scrolling.
+ * A thin gold progress bar (see ScrollProgress) sits at the top.
+ * ============================================================ */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+html, body {
+  scrollbar-width: none;         /* Firefox */
+  -ms-overflow-style: none;      /* IE / legacy Edge */
+  overscroll-behavior-y: none;
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;                 /* Chrome / Safari / Edge */
+}
+body {
+  -webkit-overflow-scrolling: touch; /* iOS momentum */
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* Subtle rise-in for sections entering the viewport */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-rise-in {
+  animation: rise-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Global micro-interaction polish */
+button, [role="button"], a {
+  -webkit-tap-highlight-color: transparent;
+}
+button:not(:disabled):active,
+[role="button"]:active {
+  transform: scale(0.97);
+  transition: transform 0.08s ease-out;
+}
+
+/* Boarding-pass style ticket with side notches */
+.boarding-pass {
+  position: relative;
+  background: linear-gradient(180deg, color-mix(in oklab, var(--card) 96%, black), color-mix(in oklab, var(--card) 88%, black));
+  border: 1px solid color-mix(in oklab, var(--gold) 25%, transparent);
+  border-radius: 1.25rem;
+  box-shadow: 0 30px 80px -20px color-mix(in oklab, black 90%, transparent),
+              0 0 0 1px color-mix(in oklab, var(--gold) 8%, transparent) inset;
+}
+.boarding-pass-notch {
+  position: relative;
+}
+.boarding-pass-notch::before,
+.boarding-pass-notch::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 28px;
+  height: 28px;
+  background: var(--background);
+  border-radius: 9999px;
+  transform: translateY(-50%);
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--gold) 22%, transparent) inset;
+}
+.boarding-pass-notch::before { left: -14px; }
+.boarding-pass-notch::after  { right: -14px; }
+.boarding-pass-dashes {
+  background-image: linear-gradient(to right, color-mix(in oklab, var(--gold) 55%, transparent) 50%, transparent 50%);
+  background-size: 10px 1.5px;
+  background-repeat: repeat-x;
+  background-position: left center;
+  height: 1.5px;
+}
+@keyframes ticket-in {
+  0% { opacity: 0; transform: translateY(20px) scale(0.97); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-ticket-in { animation: ticket-in 0.55s cubic-bezier(0.2, 0.8, 0.2, 1); }
+
+@keyframes scan-line {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+.animate-scan-line { animation: scan-line 2s ease-in-out infinite; }
+
+@keyframes success-pop {
+  0% { transform: scale(0.4); opacity: 0; }
+  60% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.animate-success-pop { animation: success-pop 0.5s cubic-bezier(0.2, 1.4, 0.4, 1); }
+
+@keyframes deny-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+}
+.animate-deny-shake { animation: deny-shake 0.45s ease-in-out; }
+
+.movie-detail-hero-mask {
+  background:
+    linear-gradient(180deg,
+      color-mix(in oklab, black 10%, transparent) 0%,
+      color-mix(in oklab, black 30%, transparent) 35%,
+      color-mix(in oklab, var(--background) 70%, transparent) 60%,
+      var(--background) 82%,
+      var(--background) 100%);
+}
+
+.movie-detail-copy {
+  position: relative;
+  isolation: isolate;
+}
+
+.movie-detail-copy::before {
+  content: none;
+}
+
+.movie-detail-title {
+  color: var(--foreground);
+  text-shadow:
+    0 2px 0 color-mix(in oklab, black 95%, transparent),
+    0 8px 22px color-mix(in oklab, black 95%, transparent),
+    0 0 3px color-mix(in oklab, black 100%, transparent);
+}
+
+@media (max-width: 767px) {
+  .movie-detail-copy::before {
+    inset: -1.25rem -1rem -1rem -1rem;
+    border-radius: var(--radius-xl);
+  }
+}
+@keyframes screen-shine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
